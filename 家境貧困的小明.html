@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>難以改變的困境：活出本地貧窮大學生小明的一星期</title>
+<style>
+:root {
+  --bg:#f5f6fa;
+  --paper:#fff;
+  --ink:#172339;
+  --muted:#566477;
+  --line:#d8dfeb;
+  --red:#b91c1c;
+  --redBg:#fff0f1;
+  --yellow:#facc15;
+  --yellowBg:#fffbdf;
+  --blue:#174ea6;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  font-family:system-ui,-apple-system,"Microsoft JhengHei",sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.75;
+}
+button { font:inherit; cursor:pointer; }
+button:focus-visible,summary:focus-visible {
+  outline:3px solid var(--blue);
+  outline-offset:4px;
+}
+button:disabled { opacity:.5; cursor:not-allowed; }
+header { max-width:1050px; margin:auto; padding:30px 20px 22px; }
+h1 { font-size:clamp(1.7rem,4vw,2.6rem); line-height:1.35; margin:10px 0; }
+h2 { font-size:1.5rem; line-height:1.5; margin:0 0 14px; }
+h3 { margin:22px 0 10px; }
+p { margin:10px 0; }
+.eyebrow { color:var(--red); font-size:.85rem; font-weight:800; }
+.muted { color:var(--muted); }
+.status {
+  position:sticky; top:0; z-index:10;
+  background:#fff;
+  border-block:1px solid var(--line);
+  box-shadow:0 4px 15px #1723390a;
+}
+.status-inner {
+  max-width:1050px; margin:auto; padding:12px 20px;
+  display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:18px;
+}
+.label { display:block; color:var(--muted); font-size:.8rem; }
+.value { font-size:1.4rem; font-weight:850; }
+.bar { background:#e7ecf3; border-radius:8px; height:7px; overflow:hidden; margin-top:6px; }
+.bar span { display:block; height:100%; background:var(--blue); transition:width .25s; }
+.red { color:var(--red); }
+main { max-width:1050px; margin:24px auto 60px; padding:0 20px; }
+.card {
+  background:var(--paper); border:1px solid var(--line);
+  border-radius:18px; padding:26px; margin-bottom:20px;
+  box-shadow:0 10px 25px #17233908;
+}
+.badge {
+  display:inline-block; background:#edf1f7; border-radius:20px;
+  padding:3px 11px; font-size:.85rem; margin-bottom:12px;
+}
+.notice {
+  background:var(--yellowBg); border-left:5px solid var(--yellow);
+  padding:13px 16px; border-radius:8px; margin:16px 0;
+}
+.danger { background:var(--redBg); border-color:var(--red); }
+.actions { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:20px; }
+.btn {
+  border:1px solid var(--line); border-radius:10px;
+  background:#fff; color:var(--ink); padding:10px 16px; font-weight:700;
+}
+.primary { background:var(--red); border-color:var(--red); color:#fff; }
+.secondary { background:#eaf0f8; }
+.progress { display:flex; gap:6px; margin-bottom:20px; }
+.dot {
+  flex:1; text-align:center; padding:6px 2px; font-size:.8rem;
+  border-radius:7px; background:#edf1f7;
+}
+.dot.current { background:var(--ink); color:#fff; }
+.dot.done { background:#dceee4; color:#145b39; }
+.timer {
+  display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+  padding:13px; border:1px solid var(--line); border-radius:12px; margin-top:20px;
+}
+.seconds { font-size:1.6rem; font-weight:850; min-width:76px; }
+.timer-track { height:6px; width:100%; background:#e7ecf3; border-radius:8px; overflow:hidden; }
+.timer-fill { height:100%; background:var(--red); }
+.options { display:grid; gap:12px; margin-top:20px; }
+.choice {
+  background:#fff; color:var(--ink); border:2px solid var(--line);
+  border-radius:12px; padding:17px; text-align:left;
+}
+.choice:hover:not(:disabled) { background:#f7faff; border-color:var(--blue); }
+.choice.job { border-left:6px solid #b37c00; background:#fffdf4; }
+.choice.home { border-left:6px solid #146c43; background:#f4fbf6; }
+.choice-title { display:block; font-weight:800; margin-bottom:5px; }
+.choice-hint { display:block; font-size:.9rem; color:var(--muted); }
+.metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:20px 0; }
+.metric { background:#f1f4f9; border-radius:12px; padding:14px; }
+.metric strong { display:block; font-size:1.4rem; }
+li { margin:7px 0; }
+details { border-top:1px solid var(--line); margin-top:20px; padding-top:15px; }
+summary { cursor:pointer; font-weight:700; }
+.table-wrap { overflow-x:auto; }
+table { border-collapse:collapse; width:100%; min-width:620px; }
+th,td { padding:11px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+th { background:#eef2f8; }
+footer { font-size:.82rem; color:var(--muted); }
+[hidden] { display:none!important; }
+@media(max-width:600px) {
+  .card { padding:18px; }
+  .status-inner { gap:8px; padding:10px; }
+  .label { font-size:.68rem; }
+  .value { font-size:1.05rem; }
+  .metrics { gap:6px; }
+  .metric { padding:9px; }
+  .metric strong { font-size:1.1rem; }
+  .dot { font-size:.7rem; }
+}
+@media print {
+  body { background:#fff; }
+  header,.status,footer { position:static; }
+  #intro,#game,#daily,.actions { display:none!important; }
+  .card { box-shadow:none; border:0; }
+  details { display:block; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">大學生貧窮主題工作坊｜七日互動體驗</div>
+  <h1>難以改變的困境：<br>活出本地貧窮大學生小明的一星期</h1>
+  <p class="muted">不是每個選擇都公平，也不是每種代價都看得見。</p>
+</header>
+
+<div class="status" aria-label="角色即時狀態">
+  <div class="status-inner">
+    <div>
+      <span class="label">精神及疲倦度｜100% 滿精神</span>
+      <span id="energy" class="value">80%</span>
+      <div class="bar"><span id="energyBar" style="width:80%"></span></div>
+    </div>
+    <div>
+      <span class="label">金錢（HKD）</span>
+      <span id="money" class="value">$300</span>
+      <span id="debt" class="label"></span>
+    </div>
+    <div>
+      <span class="label">學業成績積分（GPA）</span>
+      <span id="gpa" class="value">3.2 / 4</span>
+      <div class="bar"><span id="gpaBar" style="width:80%"></span></div>
+    </div>
+  </div>
+</div>
+
+<main>
+<section id="intro" class="card">
+  <span class="badge">故事背景</span>
+  <h2>你是小明，今年 20 歲，大學二年級。</h2>
+  <p>你和爸媽一家三口住在觀塘一個 80 呎劏房。房內只有一張上下格床，沒有獨立浴室和廁所，需要與其他租客共用。</p>
+  <p>你每星期只有 HK$300 零用錢，需要自行承擔一星期的生活開支。如果晚上回家吃媽媽煮的家常菜，晚餐便不用另外花錢。</p>
+  <div class="notice">
+    每天只有一次主要決策。你有 20 秒作出選擇，也可以隨時暫停或重設倒數。沒有「完美選項」，只有不同的代價。
+  </div>
+  <ul>
+    <li>初始精神 80%、金錢 $300、GPA 3.2。</li>
+    <li>Day 1–5 每日開始時扣除 50 點精神。</li>
+    <li>每局從 Day 2–7 隨機抽出三日提供快餐店兼職。</li>
+    <li>Day 6 有唯一一次留在家中溫書的機會。</li>
+    <li>每天結束顯示數據、支出與選擇後果。</li>
+  </ul>
+  <details>
+    <summary>完整規則與數值結算次序</summary>
+    <ol>
+      <li>Day 1 顯示初始值；按開始後扣除返學日精神 50 點。</li>
+      <li>Day 2 起，先結算昨日兼職造成的延後 GPA 後果，再恢復精神。</li>
+      <li>昨日沒有兼職：精神 +80；昨日有任何兼職：精神 +50。恢復後上限為 100。</li>
+      <li>若今天是返學日，再扣精神 50。</li>
+      <li>若返學日此時精神為 0，被迫休息半天，精神回復至 80，GPA −0.2。當天無法再接全日 10 小時更。</li>
+      <li>返學日全日兼職：即日收入 +$500、精神 −50，翌日因缺課 GPA −0.5。週末全日兼職不扣缺課分。</li>
+      <li>晚間兼職：即日收入 +$250、精神 −25。</li>
+      <li>連續兩個日終精神為 0，觸發虛構猝死結局並停止遊戲。</li>
+      <li>GPA 每次扣減事件為 0.1–0.5；總值最低 0、最高 4。</li>
+      <li>Day 6 留在家中溫書：當天只扣精神 15，金錢不變，GPA +0.2；免除該日所有生活費扣款。</li>
+      <li>其他日子的日常費用，以及兼職額外晚餐費，會在選項下方預先列出。</li>
+      <li>金錢不足不會封鎖選項；負數代表必須借款支付的未清還生活欠款。</li>
+    </ol>
+    <p class="muted">本作為虛構教學模擬。疲勞、GPA 和猝死之間的數值關係是遊戲規則，不是醫學判斷，也不代表真實大學評分制度或所有貧窮學生的經歷。</p>
+  </details>
+  <div class="actions">
+    <button id="start" class="btn primary">開始遊戲</button>
+  </div>
+</section>
+
+<section id="game" class="card" hidden>
+  <div id="progress" class="progress"></div>
+  <span id="dayLabel" class="badge"></span>
+  <h2 id="sceneTitle" tabindex="-1"></h2>
+  <div id="morning"></div>
+  <p id="sceneText"></p>
+  <div id="costNotice" class="notice"></div>
+  <div class="timer">
+    <span id="seconds" class="seconds" role="timer">20 秒</span>
+    <span id="timerStatus" class="muted">請作出今天的選擇</span>
+    <button id="pause" class="btn secondary">暫停</button>
+    <button id="resetTimer" class="btn">重設 20 秒</button>
+    <div class="timer-track"><div id="timerFill" class="timer-fill"></div></div>
+  </div>
+  <div id="timeout" class="notice danger" role="status" hidden>
+    時間已到，沒有自動選擇任何選項。請按「重設 20 秒」繼續。
+  </div>
+  <div id="options" class="options"></div>
+  <div class="actions">
+    <button class="btn restart">重新開始</button>
+  </div>
+</section>
+
+<section id="daily" class="card" hidden>
+  <span class="badge">每日結算</span>
+  <h2 id="dailyTitle" tabindex="-1"></h2>
+  <p id="result"></p>
+  <div id="dailyMetrics" class="metrics"></div>
+  <h3>今天的變動紀錄</h3>
+  <ul id="ledger"></ul>
+  <div id="warnings"></div>
+  <div class="actions">
+    <button id="next" class="btn primary">下一天</button>
+    <button class="btn restart">重新開始</button>
+  </div>
+</section>
+
+<section id="ending" class="card" hidden>
+  <span class="badge">體驗總結</span>
+  <h2 id="endingTitle" tabindex="-1"></h2>
+  <p id="endingText"></p>
+  <div id="finalMetrics" class="metrics"></div>
+  <div id="summary" class="notice"></div>
+  <h3>逐日選擇</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>日子</th><th>選擇</th><th>精神</th><th>金錢</th><th>GPA</th></tr></thead>
+      <tbody id="history"></tbody>
+    </table>
+  </div>
+  <h3>工作坊討論</h3>
+  <ol>
+    <li>哪一次決策最不像真正的「自由選擇」？為甚麼？</li>
+    <li>兼職增加了收入，但你失去了哪些時間、健康或學習機會？</li>
+    <li>同學和老師看見的是遲到、缺課或沉默；他們看不見甚麼？</li>
+    <li>家中溫書時金錢不變，代表哪些支出由家庭承擔了？這種支援是否每個人都有？</li>
+    <li>如果可以改變一項校園制度或提供一項支援，你會先改變哪一天？</li>
+  </ol>
+  <details>
+    <summary>查看完整逐日紀錄</summary>
+    <div id="details"></div>
+  </details>
+  <div class="actions">
+    <button class="btn primary restart">重新體驗並重新抽取兼職日</button>
+    <button id="print" class="btn">列印／儲存總結</button>
+  </div>
+</section>
+
+<footer>
+  所有角色、情境和費用均為工作坊設計。頁面不傳送資料、不使用外部資源；重新整理後會清除遊戲紀錄。
+</footer>
+</main>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+const clamp = (n,min,max) => Math.max(min,Math.min(max,n));
+const cash = n => (n < 0 ? "−$" : "$") + Math.abs(n).toLocaleString("en-HK");
+
+let s, scene;
+let timer = null;
+let remaining = 20000;
+let deadline = 0;
+let paused = false;
+let expired = false;
+
+function sampleJobDays() {
+  const days = [2,3,4,5,6,7];
+  for (let i = days.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [days[i],days[j]] = [days[j],days[i]];
+  }
+  return days.slice(0,3).sort((a,b) => a-b);
+}
+
+function fresh() {
+  return {
+    day:0, energy:80, money:300, gpa:3.2,
+    stage:"intro", first:null, jobDays:[],
+    previousJob:"none", previousSchool:false,
+    todayJob:"none", pendingGPA:0,
+    zeroStreak:0, dead:false, halfDay:false,
+    studyUsed:false, history:[], ledger:[],
+    flags:{ missedGroup:false, laptop:false }
+  };
+}
+
+function show(id) {
+  ["intro","game","daily","ending"].forEach(name => {
+    $(name).hidden = name !== id;
+  });
+}
+
+function status() {
+  $("energy").textContent = s.energy + "%";
+  $("money").textContent = cash(s.money);
+  $("gpa").textContent = s.gpa.toFixed(1) + " / 4";
+  $("energyBar").style.width = s.energy + "%";
+  $("energyBar").style.background = s.energy <= 25 ? "var(--red)" : "var(--blue)";
+  $("gpaBar").style.width = (s.gpa / 4 * 100) + "%";
+  $("energy").classList.toggle("red",s.energy <= 25);
+  $("money").classList.toggle("red",s.money < 0);
+  $("debt").textContent = s.money < 0 ? "未清還生活欠款" : "";
+}
+
+function energy(amount,reason) {
+  const before = s.energy;
+  s.energy = clamp(s.energy + amount,0,100);
+  const actual = s.energy - before;
+  s.ledger.push(
+    reason + "：精神 " + (amount >= 0 ? "+" : "") + amount + " 點" +
+    (actual !== amount ? "（受 0–100 上下限限制）" : "") +
+    "，現為 " + s.energy + "%。"
+  );
+}
+
+function money(amount,reason) {
+  s.money += amount;
+  s.ledger.push(reason + "：" + (amount >= 0 ? "+" : "−") +
+    "$" + Math.abs(amount) + "，結餘 " + cash(s.money) + "。");
+}
+
+function gpa(amount,reason) {
+  if (amount < 0 && (Math.abs(amount) < .1 || Math.abs(amount) > .5)) {
+    throw new Error("單次 GPA 扣減必須介乎 0.1–0.5。");
+  }
+  const before = s.gpa;
+  s.gpa = Math.round(clamp(s.gpa + amount,0,4) * 10) / 10;
+  const actual = Math.round((s.gpa - before) * 10) / 10;
+  s.ledger.push(reason + "：GPA " + (actual >= 0 ? "+" : "") +
+    actual.toFixed(1) +
+    (Math.abs(actual - amount) > .001 ? "（受 0–4 上下限限制）" : "") +
+    "，現為 " + s.gpa.toFixed(1) + "。");
+}
+
+function metrics() {
+  return `
+    <div class="metric"><span class="label">精神及疲倦度</span><strong>${s.energy}%</strong></div>
+    <div class="metric"><span class="label">金錢（HKD）</span><strong>${cash(s.money)}</strong></div>
+    <div class="metric"><span class="label">GPA</span><strong>${s.gpa.toFixed(1)} / 4</strong></div>`;
+}
+
+function stopTimer() {
+  if (timer !== null) clearInterval(timer);
+  timer = null;
+}
+
+function paintTimer() {
+  $("seconds").textContent = Math.ceil(remaining / 1000) + " 秒";
+  $("seconds").classList.toggle("red",remaining <= 5000);
+  $("timerFill").style.width = (remaining / 20000 * 100) + "%";
+}
+
+function lockOptions() {
+  document.querySelectorAll(".choice").forEach(b => {
+    b.disabled = paused || expired || s.stage !== "choice" || b.dataset.blocked === "yes";
+  });
+}
+
+function tick() {
+  remaining = Math.max(0,deadline - performance.now());
+  paintTimer();
+  if (remaining === 0) {
+    stopTimer();
+    expired = true;
+    $("timeout").hidden = false;
+    $("timerStatus").textContent = "逾時暫停";
+    $("pause").disabled = true;
+    lockOptions();
+  }
+}
+
+function runTimer() {
+  stopTimer();
+  deadline = performance.now() + remaining;
+  timer = setInterval(tick,100);
+}
+
+function resetTimer() {
+  if (s.stage !== "choice") return;
+  stopTimer();
+  remaining = 20000;
+  paused = false;
+  expired = false;
+  $("timeout").hidden = true;
+  $("pause").disabled = false;
+  $("pause").textContent = "暫停";
+  $("timerStatus").textContent = "請作出今天的選擇";
+  paintTimer();
+  lockOptions();
+  runTimer();
+}
+
+function togglePause() {
+  if (s.stage !== "choice" || expired) return;
+  if (!paused) {
+    tick();
+    if (expired) return;
+    stopTimer();
+    paused = true;
+    $("pause").textContent = "繼續";
+    $("timerStatus").textContent = "已暫停，選項暫時鎖定";
+  } else {
+    paused = false;
+    $("pause").textContent = "暫停";
+    $("timerStatus").textContent = "請作出今天的選擇";
+    runTimer();
+  }
+  lockOptions();
+}
+
+function option(title,hint,effect,result,extra = {}) {
+  return {title,hint,effect,result,...extra};
+}
+
+function buildScene(day) {
+  if (day === 1) return {
+    title:"早上洗漱的困境",
+    text:"共用廁所已被其他租客佔用，至少還要等 20 分鐘。今天有重要課堂，你必須決定如何出門。",
+    choices:[
+      option(
+        "A｜等其他住戶用完廁所",
+        "$0｜等候 20 分鐘，遲到｜GPA −0.2",
+        {gpa:-.2},
+        "【情境 2A】你洗漱後趕到學校，卻被老師訓斥並扣減出席分；聽漏的重要內容也影響了學習。GPA 下降 0.2。",
+        {branch:"A"}
+      ),
+      option(
+        "B｜不洗漱及如廁，直接返學",
+        "$0｜準時到校｜精神 −15｜GPA −0.1",
+        {energy:-15,gpa:-.1},
+        "【情境 2B】你準時到校，卻被同學嫌棄口有異味。課堂途中又因需要如廁而聽漏重點。精神下降 15 點，GPA 下降 0.1。",
+        {branch:"B"}
+      ),
+      option(
+        "C｜等候洗漱後乘的士返學",
+        "的士 −$60｜準時到校",
+        {money:-60},
+        "【情境 2C】你準時進入課室，完整聽到講解，但已經花去一星期零用錢的五分之一。",
+        {branch:"C"}
+      )
+    ]
+  };
+
+  if (day === 2) {
+    if (s.first === "A") return {
+      title:"昨天遲到，今天仍要付出代價",
+      text:"老師派下需要運用昨天知識的練習。你缺了關鍵筆記，同學可以幫忙，但時間和費用都需要安排。",
+      choices:[
+        option("A｜影印筆記，午休自己補課",
+          "額外 −$25｜精神 −10",
+          {money:-25,energy:-10},
+          "你拿到筆記，一邊吃飯一邊追進度。昨天的遲到，變成今天失去的休息。"),
+        option("B｜不補課，靠現有理解做練習",
+          "沒有額外支出｜GPA −0.2",
+          {gpa:-.2},
+          "你保住生活費，但因不理解重要步驟而失分。"),
+        option("C｜跟同學吃較貴的午餐，請他們講解",
+          "較原定午餐額外 −$45",
+          {money:-45},
+          "同學願意幫忙，你終於補回重點；得到幫助的場合卻需要額外消費。")
+      ]
+    };
+
+    if (s.first === "B") return {
+      title:"被看見的異味，沒被看見的家",
+      text:"昨天的事讓你不敢靠近同學。今天又要做小組練習，你擔心再次被嫌棄。",
+      choices:[
+        option("A｜買清潔用品，提早到校整理",
+          "額外 −$25｜精神 −10",
+          {money:-25,energy:-10},
+          "你整理好自己，但別人沒有看見你為普通的一天付出了多少。"),
+        option("B｜避開同學，獨自完成練習",
+          "沒有額外支出｜GPA −0.2",
+          {gpa:-.2},
+          "你避開了目光，也失去了分工與討論的機會。"),
+        option("C｜私下解釋困境，向組員借用品",
+          "沒有額外支出｜精神 −15",
+          {energy:-15},
+          "組員願意幫忙，但你為此說出了原本不想公開的家庭處境。")
+      ]
+    };
+
+    return {
+      title:"的士之後，教材也要錢",
+      text:"昨天沒有缺課，但現金少了一截。今天課程需要一本練習冊，圖書館只有不能外借的共用版本。",
+      choices:[
+        option("A｜買二手練習冊",
+          "額外 −$45",
+          {money:-45},
+          "教材終於齊備，但生活費又減少了。"),
+        option("B｜等候共用版本，抄寫需要的內容",
+          "沒有額外支出｜精神 −15",
+          {energy:-15},
+          "你用排隊和抄寫的時間，換取不用付錢的教材。"),
+        option("C｜暫時不買，直接完成練習",
+          "沒有額外支出｜GPA −0.1",
+          {gpa:-.1},
+          "你保住現金，但因缺少練習內容而失分。")
+      ]
+    };
+  }
+
+  if (day === 3) return {
+    title:"交功課之前，先找一部電腦",
+    text:"今晚要交功課，你沒有自己的電腦。圖書館電腦要排隊，同學借出的舊電腦又可能有軟件問題。",
+    choices:[
+      option("A｜在圖書館等候電腦",
+        "沒有額外支出｜精神 −20",
+        {energy:-20},
+        "你在閉館前趕完功課，但原本可以休息的時間都花在等待。"),
+      option("B｜到付費電腦店完成",
+        "額外 −$50｜精神 −5",
+        {money:-50,energy:-5},
+        "你順利完成作業，付費設備暫時解決了問題。"),
+      option("C｜借舊電腦回家做",
+        "沒有額外支出｜精神 −10｜GPA −0.1",
+        {energy:-10,gpa:-.1},
+        "舊電腦格式不相容，部分圖表出錯。你有交功課，但品質受器材限制。",
+        {flag:"laptop"})
+    ]
+  };
+
+  if (day === 4) return {
+    title:"小組會議，還是自己的生活費？",
+    text:(s.previousJob !== "none"
+      ? "昨天兼職後，你今天仍然疲倦。"
+      : "昨天沒有兼職，你仍需要小心計算餘額。") +
+      " 組員約在咖啡店討論報告。你可以參加、遠端協作，或者先完成自己的部分。",
+    choices:[
+      option("A｜到咖啡店參加討論",
+        "額外消費及交通 −$55｜精神 −5",
+        {money:-55,energy:-5},
+        "你跟上小組討論，但參與的機會附帶消費。"),
+      option("B｜在校內用手機遠端參與",
+        "沒有額外支出｜精神 −15｜GPA −0.1",
+        {energy:-15,gpa:-.1},
+        "你努力追上對話，卻因小螢幕和網絡中斷錯過部分分工。"),
+      option("C｜不參加會議，自己完成分配部分",
+        "沒有額外支出｜精神 −5｜GPA −0.2",
+        {energy:-5,gpa:-.2},
+        "你完成自己的部分，但與其他組員的內容重疊，報告整合受影響。",
+        {flag:"missedGroup"})
+    ]
+  };
+
+  if (day === 5) return {
+    title:"測驗前的午飯時間",
+    text:(s.flags.laptop
+      ? "之前的器材問題已拖慢你的進度。"
+      : "連續幾天的課堂與生活安排令你難以完整溫習。") +
+      " 下午有測驗，午飯時間是最後的準備機會。",
+    choices:[
+      option("A｜正常吃飯，再集中溫習",
+        "沒有額外支出｜精神 −10",
+        {energy:-10},
+        "你照顧了基本需要，也利用剩下時間溫習，沒有額外學業扣分。"),
+      option("B｜少吃一餐，把時間留給溫習",
+        "當日膳食費減少 $25｜精神 −20",
+        {money:25,energy:-20},
+        "你省下部分午餐費，卻餓着肚子完成測驗。這筆 $25 是支出減少，不是新增收入。"),
+      option("C｜吃完飯先休息，不再溫習",
+        "精神 +10｜GPA −0.2",
+        {energy:10,gpa:-.2},
+        "你需要休息，但沒有準備好的內容仍反映在測驗表現。")
+    ]
+  };
+
+  if (day === 6) return {
+    title:"星期六：唯一一次留在家中溫書的機會",
+    text:"今天不用上課。媽媽願意把家中的食物留給你，家人也盡量騰出一個角落讓你溫書。你可以留在家中，或外出處理學習與小組安排。",
+    choices:[
+      option("A｜整天留在家中溫書，不外出、不兼職",
+        "全日精神只減 15｜金錢不變｜GPA +0.2｜只出現一次",
+        {energy:-15,gpa:.2},
+        "你留在家中完成溫習。今天沒有任何金錢變動，精神只減少 15 點，GPA 增加 0.2。這段喘息也依靠了家人提供食物和空間。",
+        {homeStudy:true}),
+      option("B｜到公共圖書館溫習",
+        "額外交通 −$12｜精神 −20｜另扣週末膳食費",
+        {money:-12,energy:-20},
+        "圖書館提供相對安靜的環境，但往返與等候仍消耗時間和精神。"),
+      option("C｜參加小組綵排",
+        "額外交通及場地消費 −$50｜精神 −15｜另扣週末膳食費",
+        {money:-50,energy:-15},
+        s.flags.missedGroup
+          ? "你把之前沒有說清楚的分工重新對齊，但已扣除的成績不會自動補回。"
+          : "你與同學完成綵排，為報告做準備；週末仍不是完全屬於自己的時間。")
+    ]
+  };
+
+  return {
+    title:"星期日：下星期開始之前",
+    text:"衣物還未乾，下星期又有課和報告。你想準備好，也想真正休息一下；手上的時間和餘額卻仍然有限。",
+    choices:[
+      option("A｜付費洗烘衣物，再整理用品",
+        "額外 −$45｜精神 −10",
+        {money:-45,energy:-10},
+        "衣物和用品準備好了，但為下星期消除障礙也需要花錢。"),
+      option("B｜在家手洗，再等家人睡後整理功課",
+        "沒有額外支出｜精神 −30",
+        {energy:-30},
+        "你省下洗衣費，用體力和休息時間補上。這不是再次出現的溫書加分選項。"),
+      option("C｜先休息，暫緩處理預習和衣物",
+        "精神 +20｜GPA −0.2",
+        {energy:20,gpa:-.2},
+        "你終於讓自己停下來，但未完成的準備將跟着你進入下一星期。")
+    ]
+  };
+}
+
+function addJobs(base) {
+  if (!s.jobDays.includes(s.day)) return base;
+
+  const school = s.day <= 5;
+  base.text += " 同時，快餐店主管臨時提供兩個兼職更次，你只能在原有安排與兼職之間選擇其中一項。";
+
+  base.choices.push(
+    option(
+      school ? "兼職一｜不上課，返全日 10 小時" : "兼職一｜返全日 10 小時",
+      "工資 +$500｜精神 −50｜另付晚餐 $35" +
+        (school ? "｜翌日 GPA −0.5" : "｜假日不扣缺課分") +
+        (s.halfDay ? "｜已失去半天，今天不可選" : ""),
+      {money:500,energy:-50},
+      school
+        ? "你在快餐店連續工作 10 小時，賺到 $500，但缺席今天的課。學業代價將在明天結算。"
+        : "你把假日交給快餐店的 10 小時更，賺到 $500。沒有缺課，但休息時間也消失了。",
+      {job:"full",disabled:s.halfDay}
+    ),
+    option(
+      "兼職二｜晚上返 5 小時",
+      "工資 +$250｜精神 −25｜另付晚餐 $35" +
+        (school ? "｜日間正常上課" : ""),
+      {money:250,energy:-25},
+      "你接受晚間 5 小時更。工資增加了 $250，但晚間休息被工作取代，亦不能回家吃免費晚餐。",
+      {job:"night"}
+    )
+  );
+  return base;
+}
+
+function baseCostText() {
+  if (s.day === 1) return "今日固定開支：早餐及午餐 $60＋放學回家交通 $10，共 $70。選項的其他費用另計。";
+  if (s.day <= 5) return "今日固定開支：早餐及午餐 $60＋交通 $20，共 $80。兼職選項另付晚餐 $35；全日更的交通預算同為 $20。";
+  return "今日一般開支：早餐及午餐 $45；其他交通按選項另計。兼職另付晚餐 $35。" +
+    (s.day === 6 ? "「在家溫書」是例外：全日金錢完全不變。" : "");
+}
+
+function startDay() {
+  stopTimer();
+  s.day++;
+  s.stage = "choice";
+  s.ledger = [];
+  s.todayJob = "none";
+  s.halfDay = false;
+  const notes = [];
+
+  if (s.day > 1) {
+    if (s.pendingGPA) {
+      gpa(-s.pendingGPA,"昨日全日兼職缺課的延後影響");
+      notes.push("昨天全日兼職缺課，今天 GPA −0.5。");
+      s.pendingGPA = 0;
+    }
+    const recovery = s.previousJob === "none" ? 80 : 50;
+    energy(recovery,"新一天的精神恢復");
+    notes.push("昨晚恢復精神 +" + recovery + " 點，上限為 100。");
+  }
+
+  if (s.day <= 5) {
+    energy(-50,"返學日固定精神消耗");
+    notes.push("返學日固定精神 −50 點。");
+    if (s.energy === 0) {
+      s.halfDay = true;
+      energy(80,"被迫休息半天");
+      gpa(-.2,"錯過半天課堂");
+      notes.push("精神耗盡，被迫休息半天：精神回復至 80%，GPA −0.2。今天不能接全日更。");
+    }
+  } else {
+    notes.push("今天是假日，不扣返學日的 50 點精神。");
+  }
+
+  scene = addJobs(buildScene(s.day));
+  show("game");
+  $("progress").innerHTML = Array.from({length:7},(_,i) =>
+    `<span class="dot ${i+1===s.day?"current":i+1<s.day?"done":""}">Day ${i+1}</span>`
+  ).join("");
+  $("dayLabel").textContent =
+    "Day " + s.day + "｜" + (s.day <= 5 ? "返學日" : "假日") +
+    (s.jobDays.includes(s.day) ? "｜今天有兼職空缺" : "");
+  $("sceneTitle").textContent = scene.title;
+  $("sceneText").textContent = scene.text;
+  $("costNotice").textContent = baseCostText();
+  $("morning").replaceChildren();
+  const box = document.createElement("div");
+  box.className = "notice";
+  notes.forEach(text => {
+    const p = document.createElement("p");
+    p.textContent = text;
+    box.appendChild(p);
+  });
+  $("morning").appendChild(box);
+
+  $("options").replaceChildren();
+  scene.choices.forEach((choice,index) => {
+    const b = document.createElement("button");
+    b.className = "choice" + (choice.job ? " job" : "") + (choice.homeStudy ? " home" : "");
+    b.dataset.blocked = choice.disabled ? "yes" : "no";
+    const title = document.createElement("span");
+    title.className = "choice-title";
+    title.textContent = choice.title;
+    const hint = document.createElement("span");
+    hint.className = "choice-hint";
+    hint.textContent = choice.hint;
+    b.append(title,hint);
+    b.addEventListener("click",() => choose(index));
+    $("options").appendChild(b);
+  });
+  status();
+  resetTimer();
+  $("sceneTitle").focus();
+}
+
+function settleCosts(choice) {
+  if (choice.homeStudy) {
+    s.ledger.push("今天留在家中，不外出、不兼職；由家庭提供膳食，全日金錢不變。");
+    return;
+  }
+  if (s.day === 1) {
+    money(-60,"早餐及午餐");
+    money(-10,"放學回家交通");
+  } else if (s.day <= 5) {
+    money(-60,"早餐及午餐");
+    money(-20,choice.job === "full" ? "往返工作地點交通" : "當日交通");
+  } else {
+    money(-45,"週末早餐及午餐");
+  }
+  if (choice.job) money(-35,"兼職未能回家吃飯，另購晚餐");
+  else s.ledger.push("晚餐在家吃媽媽煮的家常菜：$0。");
+}
+
+function choose(index) {
+  if (s.stage !== "choice" || paused || expired) return;
+  tick();
+  if (expired) return;
+
+  const choice = scene.choices[index];
+  if (!choice || choice.disabled || (choice.homeStudy && s.studyUsed)) return;
+
+  stopTimer();
+  s.stage = "daily";
+
+  if (choice.branch) s.first = choice.branch;
+  if (choice.flag) s.flags[choice.flag] = true;
+  if (choice.homeStudy) s.studyUsed = true;
+  if (choice.job) s.todayJob = choice.job;
+
+  const effect = choice.effect;
+  if (effect.money) {
+    money(effect.money,choice.job ? "快餐店兼職工資" :
+      s.day === 5 && effect.money > 0 ? "減少午餐支出" : "選項額外費用");
+  }
+  if (effect.energy) energy(effect.energy,"本次選擇的精神影響");
+  if (effect.gpa) gpa(effect.gpa,"本次選擇的學業影響");
+
+  if (choice.job === "full" && s.day <= 5) {
+    s.pendingGPA = .5;
+    s.ledger.push("今天全日兼職缺課：GPA −0.5 將於翌日結算，不在今天重複扣除。");
+  }
+
+  settleCosts(choice);
+
+  s.zeroStreak = s.energy === 0 ? s.zeroStreak + 1 : 0;
+  s.dead = s.zeroStreak >= 2;
+  s.previousJob = s.todayJob;
+  s.previousSchool = s.day <= 5;
+
+  s.history.push({
+    day:s.day,title:scene.title,choice:choice.title,result:choice.result,
+    energy:s.energy,money:s.money,gpa:s.gpa,
+    job:s.todayJob,homeStudy:!!choice.homeStudy,ledger:[...s.ledger]
+  });
+
+  show("daily");
+  status();
+  $("dailyTitle").textContent = "Day " + s.day + " 結束";
+  $("result").textContent = choice.result;
+  $("dailyMetrics").innerHTML = metrics();
+  $("ledger").replaceChildren();
+
+  s.ledger.forEach(text => {
+    const li = document.createElement("li");
+    li.textContent = text;
+    $("ledger").appendChild(li);
+  });
+
+  const warnings = [];
+  if (s.money < 0) warnings.push("目前有 $" + Math.abs(s.money) + " 未清還生活欠款。");
+  if (s.zeroStreak === 1) warnings.push("今天日終精神為 0。如果下一個日終仍為 0，將觸發連續耗盡結局。");
+  if (s.pendingGPA && !s.dead) warnings.push("尚未結算：明天將因今天全日兼職缺課而扣 GPA 0.5。");
+  if (s.dead) warnings.push("連續兩個日終精神為 0，觸發故事中的猝死結局，不能繼續下一天。此為虛構遊戲規則。");
+
+  $("warnings").replaceChildren();
+  warnings.forEach(text => {
+    const box = document.createElement("div");
+    box.className = "notice danger";
+    box.textContent = text;
+    $("warnings").appendChild(box);
+  });
+
+  $("next").textContent = s.dead || s.day === 7 ? "查看總結" : "進入 Day " + (s.day+1);
+  $("dailyTitle").focus();
+}
+
+function ending() {
+  stopTimer();
+  s.stage = "ending";
+  show("ending");
+
+  $("endingTitle").textContent = s.dead
+    ? "故事提早結束：連續耗盡"
+    : "一星期結束了，困境卻未必結束";
+
+  $("endingText").textContent = s.dead
+    ? "依照本作指定的虛構規則，小明因連續兩日日終精神耗盡而猝死，故事停止。這不是對玩家或貧窮學生的責備，也不能用來判斷真實疲勞的醫學風險。請把討論放在：為甚麼基本生活、學習與休息會被迫互相犧牲？"
+    : "你走完了小明的一星期。三個數字只記錄了部分代價：等待、尷尬、家庭支援、私隱和錯過的休息，未必能完整反映在金錢與成績上。";
+
+  $("finalMetrics").innerHTML = metrics();
+  const full = s.history.filter(h => h.job === "full").length;
+  const night = s.history.filter(h => h.job === "night").length;
+  $("summary").textContent =
+    "本局兼職空缺日：Day " + s.jobDays.join("、Day ") +
+    "。你完成 " + s.history.length + " 天，返全日更 " + full +
+    " 次、晚間更 " + night + " 次。" +
+    (s.studyUsed ? "你使用了唯一一次在家溫書機會。" : "你沒有使用在家溫書機會。") +
+    (s.money < 0 ? "目前仍有 $" + Math.abs(s.money) + " 欠款。" : "目前餘額 " + cash(s.money) + "。") +
+    "本作不設以收入或 GPA 決定的勝利排名。";
+
+  $("history").replaceChildren();
+  $("details").replaceChildren();
+
+  s.history.forEach(h => {
+    const tr = document.createElement("tr");
+    ["Day "+h.day,h.choice,h.energy+"%",cash(h.money),h.gpa.toFixed(1)]
+      .forEach(text => {
+        const td = document.createElement("td");
+        td.textContent = text;
+        tr.appendChild(td);
+      });
+    $("history").appendChild(tr);
+
+    const block = document.createElement("div");
+    const title = document.createElement("h3");
+    title.textContent = "Day " + h.day + "｜" + h.title;
+    const p = document.createElement("p");
+    p.textContent = h.result;
+    const ul = document.createElement("ul");
+    h.ledger.forEach(text => {
+      const li = document.createElement("li");
+      li.textContent = text;
+      ul.appendChild(li);
+    });
+    block.append(title,p,ul);
+    $("details").appendChild(block);
+  });
+  $("endingTitle").focus();
+}
+
+function restart() {
+  if (s.stage !== "intro" && !confirm("確定重新開始？這次的選擇紀錄會清除，兼職日也會重新抽取。")) return;
+  stopTimer();
+  s = fresh();
+  status();
+  show("intro");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+$("start").addEventListener("click",() => {
+  if (s.stage !== "intro") return;
+  s.jobDays = sampleJobDays();
+  startDay();
+});
+$("pause").addEventListener("click",togglePause);
+$("resetTimer").addEventListener("click",resetTimer);
+$("next").addEventListener("click",() => {
+  if (s.stage !== "daily") return;
+  if (s.dead || s.day >= 7) ending();
+  else startDay();
+});
+document.querySelectorAll(".restart").forEach(b => b.addEventListener("click",restart));
+$("print").addEventListener("click",() => window.print());
+
+document.addEventListener("visibilitychange",() => {
+  if (document.hidden && s.stage === "choice" && !paused && !expired) togglePause();
+});
+
+s = fresh();
+status();
+</script>
+</body>
+</html>
